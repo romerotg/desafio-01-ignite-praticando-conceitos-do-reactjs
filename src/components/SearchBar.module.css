@@ -31,4 +31,11 @@
   border-radius: 8px;
   border: 0;
   height: 3.375rem;
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background: var(--blue-300);
 }
