@@ -24,9 +24,12 @@ export function Task({ task, onDeleteTask }: TaskProps) {
           {task.content}
         </p>
       </div>
+      
       <button onClick={handleDeleteTask}>
         <Trash size={24} />
       </button>
+
+      <input type="checkbox"/>
     </div>
   );
 }

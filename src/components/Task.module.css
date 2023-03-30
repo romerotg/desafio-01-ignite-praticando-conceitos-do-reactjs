@@ -18,9 +18,43 @@
   gap: 0.75rem;
 }
 
-.taskInfo input {
+.taskInfo input[type="checkbox"] {
+  appearance: none;
+  
   line-height: 0;
   box-shadow: none;
+
+  width: 1rem;
+  height: 1rem;
+
+  color: var(--gray-100);
+  border: 1px solid var(--blue-300);
+  border-radius: 50%;
+
+  position: relative;
+}
+
+.taskInfo input[type="checkbox"]:hover {
+  border: 1px solid var(--blue-500);
+}
+
+.taskInfo input[type="checkbox"]:checked {
+  border: 1px solid var(--purple-500);
+  background: var(--purple-500);
+}
+
+.taskInfo input[type="checkbox"]:checked:hover {
+  border: 1px solid var(--purple-300);
+  background: var(--purple-300);
+}
+
+.taskInfo input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  font-size: 0.8rem;
+  font-weight: 700;
+  top: 0.5rem;
+  left: 0.1rem;
 }
 
 .taskTextUnchecked {
