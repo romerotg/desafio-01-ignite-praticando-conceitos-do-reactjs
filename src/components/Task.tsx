@@ -1,20 +1,30 @@
 import { Trash } from '@phosphor-icons/react';
 import styles from './Task.module.css';
 
-interface TaskProps {
-  checked: boolean;
+export interface TaskType {
+  completed: boolean;
+  content: string;
 }
 
-export function Task({ checked }: TaskProps) {
+interface TaskProps {
+  task: TaskType;
+  onDeleteTask: (content: string) => void;
+}
+
+export function Task({ task, onDeleteTask }: TaskProps) {
+  function handleDeleteTask() {
+    onDeleteTask(task.content);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.taskInfo}>
         <input type="checkbox"/>
-        <p className={checked ? styles.taskTextChecked : styles.taskTextUnchecked}>
-          Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.
+        <p className={task.completed ? styles.taskTextChecked : styles.taskTextUnchecked}>
+          {task.content}
         </p>
       </div>
-      <button>
+      <button onClick={handleDeleteTask}>
         <Trash size={24} />
       </button>
     </div>

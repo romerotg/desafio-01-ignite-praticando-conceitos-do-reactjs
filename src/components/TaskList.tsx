@@ -1,9 +1,15 @@
 import { EmptyTaskList } from './EmptyTaskList';
 import { FilledTaskList } from './FilledTaskList';
+import { TaskType } from './Task';
+
 import styles from './TaskList.module.css';
 
-export function TaskList() {
-  const empty = false;
+interface TaskListProps {
+  tasks: TaskType[];
+  onDeleteTask: (content: string) => void;
+}
+
+export function TaskList({ tasks, onDeleteTask }: TaskListProps) {
   return (
     <div className={styles.taskList}>
       <div className={styles.info}>
@@ -18,7 +24,7 @@ export function TaskList() {
         </div>
       </div>
 
-      { empty ? <EmptyTaskList /> : <FilledTaskList /> }
+      { tasks.length === 0 ? <EmptyTaskList /> : <FilledTaskList tasks={tasks} onDeleteTask={onDeleteTask} /> }
     </div>
   );
 }
