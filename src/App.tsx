@@ -21,6 +21,14 @@ const initialTasks = [
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
 
+  function addTask(content: string) {
+    if (tasks.filter(task => task.content === content).length === 0) {
+      setTasks((state) => {
+        return [...state, { completed: false, content}];
+      });
+    }
+  }
+
   function deleteTask(content: string) {
     setTasks((state) => {
       return state.filter(task => task.content !== content);
@@ -32,7 +40,7 @@ export function App() {
       <Header />
 
       <div className={styles.wrapper}>
-        <SearchBar />
+        <SearchBar onAddTask={addTask} />
         <TaskList tasks={tasks} onDeleteTask={deleteTask} />
       </div>
     </>
