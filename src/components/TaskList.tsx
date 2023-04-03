@@ -7,9 +7,10 @@ import styles from './TaskList.module.css';
 interface TaskListProps {
   tasks: TaskType[];
   onDeleteTask: (content: string) => void;
+  onToggleTaskStatus: (content: string, completed: boolean) => void;
 }
 
-export function TaskList({ tasks, onDeleteTask }: TaskListProps) {
+export function TaskList({ tasks, onDeleteTask, onToggleTaskStatus }: TaskListProps) {
   const tasksCount = tasks.length;
   const completedTasks = tasks.filter(task => task.completed);
   const completedTasksCount = completedTasks.length;
@@ -24,11 +25,19 @@ export function TaskList({ tasks, onDeleteTask }: TaskListProps) {
 
         <div className={styles.infoChild}>
           <span className={styles.doneTasksText}>Concluídas</span>
-          <span className={styles.counterContainer}>{`${completedTasksCount} de ${tasksCount}`}</span>
+          <span className={styles.counterContainer}>
+            {`${completedTasksCount} de ${tasksCount}`}
+          </span>
         </div>
       </div>
 
-      { tasks.length === 0 ? <EmptyTaskList /> : <FilledTaskList tasks={tasks} onDeleteTask={onDeleteTask} /> }
+      { tasks.length === 0 ?
+        <EmptyTaskList /> :
+        <FilledTaskList
+          tasks={tasks}
+          onDeleteTask={onDeleteTask}
+          onToggleTaskStatus={onToggleTaskStatus}
+        /> }
     </div>
   );
 }

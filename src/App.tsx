@@ -1,25 +1,17 @@
+import { useState } from 'react';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { TaskList } from './components/TaskList';
+import { TaskType } from './components/Task';
 
 import styles from './App.module.css';
 
 import './global.css'
-import { useState } from 'react';
 
-const initialTasks = [
-  {
-    completed: false,
-    content: 'Tarefia a fazer de número 1'
-  },
-  {
-    completed: true,
-    content: 'Tarefia a fazer de número 2'
-  }
-]
+
 
 export function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([] as TaskType[]);
 
   function addTask(content: string) {
     if (tasks.filter(task => task.content === content).length === 0) {
@@ -27,6 +19,17 @@ export function App() {
         return [...state, { completed: false, content}];
       });
     }
+  }
+
+  function toggleTaskStatus(content: string, completed: boolean) {
+    setTasks((state) => {
+      return state.map(task => {
+        if (task.content === content)
+          return { ...task, completed };
+        else
+          return task
+      });
+    });
   }
 
   function deleteTask(content: string) {
@@ -41,7 +44,11 @@ export function App() {
 
       <div className={styles.wrapper}>
         <SearchBar onAddTask={addTask} />
-        <TaskList tasks={tasks} onDeleteTask={deleteTask} />
+        <TaskList
+          tasks={tasks}
+          onDeleteTask={deleteTask}
+          onToggleTaskStatus={toggleTaskStatus}
+        />
       </div>
     </>
   )
