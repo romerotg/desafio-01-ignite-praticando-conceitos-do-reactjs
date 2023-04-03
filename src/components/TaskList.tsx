@@ -10,17 +10,21 @@ interface TaskListProps {
 }
 
 export function TaskList({ tasks, onDeleteTask }: TaskListProps) {
+  const tasksCount = tasks.length;
+  const completedTasks = tasks.filter(task => task.completed);
+  const completedTasksCount = completedTasks.length;
+
   return (
     <div className={styles.taskList}>
       <div className={styles.info}>
         <div className={styles.infoChild}>
           <span className={styles.createdTasksText}>Tarefas criadas</span>
-          <span className={styles.counterContainer}>0</span>
+          <span className={styles.counterContainer}>{tasksCount}</span>
         </div>
 
         <div className={styles.infoChild}>
           <span className={styles.doneTasksText}>Concluídas</span>
-          <span className={styles.counterContainer}>0</span>
+          <span className={styles.counterContainer}>{`${completedTasksCount} de ${tasksCount}`}</span>
         </div>
       </div>
 
