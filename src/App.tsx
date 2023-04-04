@@ -8,8 +8,6 @@ import styles from './App.module.css';
 
 import './global.css'
 
-
-
 export function App() {
   const [tasks, setTasks] = useState([] as TaskType[]);
 
